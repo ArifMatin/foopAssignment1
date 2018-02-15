@@ -10,7 +10,6 @@ namespace Assignment1
 
     class Car : Vehicle
     {
-        public static Random random = new Random();
         public static int vehicleMakeIndex;
 
         public CarBodyType BodyType { get; set; }
@@ -25,7 +24,7 @@ namespace Assignment1
             return String.Format(base.ToString() + " " + BodyType);
         }
 
-        public static string GetVehicleModel()
+        public static string GetVehicleModel(Random random)
         {
             string[][] vehicleModelArray = new string[3][];
 
@@ -33,11 +32,11 @@ namespace Assignment1
             vehicleModelArray[2] = new string[] { "Golf", "Passat", "Jetta", "Polo", "Bora", "GTI", "T-Roc" }; //vw
             vehicleModelArray[0] = new string[] { "A1", "A2", "S3", "A4", "A5", "A6", "Q3", "Q7" }; // Audi
 
-            int arrayLength = vehicleModelArray.Length;
+            int arrayLength = vehicleModelArray[vehicleMakeIndex].Length;
 
             return vehicleModelArray[vehicleMakeIndex][random.Next(0, arrayLength - 1)];
         }
-        public static string GetVehicleMake()               //this method gets 
+        public static string GetVehicleMake(Random random)               //this method gets 
         {
             string[] vehicleMakeArray = { "Audi", "Ford", "Volkswagen" };
             int arrayLength = vehicleMakeArray.Length;

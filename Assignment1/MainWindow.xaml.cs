@@ -23,30 +23,49 @@ namespace Assignment1
     {
         private ObservableCollection<Vehicle> vehicleCollection = new ObservableCollection<Vehicle>();
 
+        public Random random = new Random();
+
         public MainWindow()
         {
             InitializeComponent();
-            Car car1;
-            Car car2;
-            Car car3;
-
-            Bike bike1;
-            Bike bike2;
-            Bike bike3;
-
-            vehicleCollection.Add(car1 = new Car(Car.GetVehicleMake(), Car.GetVehicleModel(), CarBodyType.MPV));
-            vehicleCollection.Add(car2 = new Car(Car.GetVehicleMake(), Car.GetVehicleModel(), CarBodyType.MPV));
-            vehicleCollection.Add(car3 = new Car(Car.GetVehicleMake(), Car.GetVehicleModel(), CarBodyType.MPV));
-
-            vehicleCollection.Add(bike1 = new Bike(Bike.GetVehicleMake(),Bike.GetVehicleModel(),BikeType.Scooter));
-            vehicleCollection.Add(bike3 = new Bike(Bike.GetVehicleMake(), Bike.GetVehicleModel(), BikeType.Scooter));
-            vehicleCollection.Add(bike3 = new Bike(Bike.GetVehicleMake(), Bike.GetVehicleModel(), BikeType.Scooter));
+ 
+            CreateVanObjects(random,10);
+            CreateBikeObjects(random, 10);
+            CreateCaranObjects(random,10);
 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             listBoxVehicle.ItemsSource = vehicleCollection;
+        }
+
+        private void CreateVanObjects(Random random, int numOfObjects)
+        {
+            Van[] vanArray = new Van[numOfObjects];
+            for (int i = 0; i < numOfObjects; i++)
+            {
+                vanArray[i] = new Van(Van.GetVehicleMake(random), Van.GetVehicleModel(random), (VanType)random.Next(6));
+                vehicleCollection.Add(vanArray[i]);
+            }
+        }
+        private void CreateCaranObjects(Random random, int numOfObjects)
+        {
+            Car[] CarArray = new Car[numOfObjects];
+            for (int i = 0; i < numOfObjects; i++)
+            {
+                CarArray[i] = new Car(Car.GetVehicleMake(random), Car.GetVehicleModel(random), (CarBodyType)random.Next(6));
+                vehicleCollection.Add(CarArray[i]);
+            }
+        }
+        private void CreateBikeObjects(Random random, int numOfObjects)
+        {
+            Bike[] BikeArray = new Bike[numOfObjects];
+            for (int i = 0; i < numOfObjects; i++)
+            {
+                BikeArray[i] = new Bike(Bike.GetVehicleMake(random), Bike.GetVehicleModel(random), (BikeType)random.Next(6));
+                vehicleCollection.Add(BikeArray[i]);
+            }
         }
     }
 }
