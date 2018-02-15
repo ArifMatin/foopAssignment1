@@ -28,7 +28,7 @@ namespace Assignment1
         {
             string[][] vanModelArray = new string[3][];
 
-            vanModelArray[1] = new string[] { "", "Focus", "Mondeo Fusion", "Taurus", "Mustang", "C-Max" }; // fords models
+            vanModelArray[1] = new string[] { "", "Focus", "Mondeo ", "Taurus", "Mustang", "C-Max" }; // fords models
             vanModelArray[2] = new string[] { "Golf", "Passat", "Jetta", "Polo", "Bora", "GTI", "T-Roc" }; //vw
             vanModelArray[0] = new string[] { "A1", "A2", "S3", "A4", "A5", "A6", "Q3", "Q7" }; // Audi
 
