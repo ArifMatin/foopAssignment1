@@ -14,7 +14,7 @@ namespace Assignment1
 
         public CarBodyType BodyType { get; set; }
 
-        public Car(string model, string make, CarBodyType type):base(model, make)
+        public Car(string model, string make, CarBodyType type, int price,int year,int mile,double size):base(model, make, price,year,mile,size)
         {
             BodyType = type;
         }
@@ -44,6 +44,9 @@ namespace Assignment1
 
             return vehicleMakeArray[vehicleMakeIndex];
         }
-
+        public override string GetDetails()
+        {
+            return String.Format(base.GetDetails() + "Type:\t{0}\n", this.GetType().Name);
+        }
     }
 }

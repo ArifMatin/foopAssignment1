@@ -14,7 +14,7 @@ namespace Assignment1
 
         public BikeType BodyType { get; set; }
 
-        public Bike (string model, string make, BikeType type):base(model, make)
+        public Bike (string model, string make, BikeType type, int price,int year,int mile,double size):base(model, make,price,year,mile,size)
         {
             BodyType = type;
         }
@@ -44,6 +44,10 @@ namespace Assignment1
             bikeMakeIndex = random.Next(0, arrayLength - 1);
 
             return BikeMakeArray[bikeMakeIndex];
+        }
+        public override string GetDetails()
+        {
+            return String.Format(base.GetDetails() + "Type:\t{0}\n", this.GetType().Name);
         }
     }
 }

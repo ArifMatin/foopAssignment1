@@ -5,9 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
-    <Grid>
-        <ListBox x:Name="listBoxVehicle" HorizontalAlignment="Left" Height="182" Margin="74,92,0,0" VerticalAlignment="Top" Width="255"/>
+        Title="MainWindow" Height="801.527" Width="909.733" Loaded="Window_Loaded">
+    <DockPanel Margin="0,0,0,0">
+        <StackPanel DockPanel.Dock="Top" Height="87" Margin="0,0,0.2,0" Orientation="Horizontal">
+            <RadioButton x:Name="radioAll" Content="All" Margin="5,20" Padding="5" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="radioCars" Content="Cars" Margin="5,20" Padding="5" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="radioBikes" Content="Bikes" Margin="5,20" Padding="5" Checked="RadioButton_Checked"/>
+            <RadioButton x:Name="radioVans" Content="Vans" Margin="5,20" Padding="5" Checked="RadioButton_Checked"/>
 
-    </Grid>
+        </StackPanel>
+        <Grid Margin="0,0,0.2,-177.2" DockPanel.Dock="Bottom" Height="935">
+            <ListBox x:Name="listBoxVehicle" HorizontalAlignment="Left" Height="409" Margin="41,43,0,0" VerticalAlignment="Top" Width="363" SelectionChanged="listBoxVehicle_SelectionChanged"/>
+            <TextBlock x:Name="textBlockInfo" HorizontalAlignment="Left" Margin="502,196,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="304" Width="310"/>
+
+        </Grid>
+    </DockPanel>
+
+
 </Window>

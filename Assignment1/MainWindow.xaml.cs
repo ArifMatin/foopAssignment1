@@ -22,6 +22,7 @@ namespace Assignment1
     public partial class MainWindow : Window
     {
         private ObservableCollection<Vehicle> vehicleCollection = new ObservableCollection<Vehicle>();
+        private ObservableCollection<Vehicle> filteredvehicleCollection = new ObservableCollection<Vehicle>();
 
         public Random random = new Random();
 
@@ -29,7 +30,7 @@ namespace Assignment1
         {
             InitializeComponent();
  
-            CreateVanObjects(random,10);
+            CreateVanObjects(random,20);
             CreateBikeObjects(random, 10);
             CreateCaranObjects(random,10);
 
@@ -45,7 +46,8 @@ namespace Assignment1
             Van[] vanArray = new Van[numOfObjects];
             for (int i = 0; i < numOfObjects; i++)
             {
-                vanArray[i] = new Van(Van.GetVehicleMake(random), Van.GetVehicleModel(random), (VanType)random.Next(6));
+                vanArray[i] = new Van(Van.GetVehicleMake(random), Van.GetVehicleModel(random), (VanType)random.Next(6), random.Next(10000,30000),
+                    GetRandomYear(),random.Next(300000), random.Next(10, 30));
                 vehicleCollection.Add(vanArray[i]);
             }
         }
@@ -54,7 +56,8 @@ namespace Assignment1
             Car[] CarArray = new Car[numOfObjects];
             for (int i = 0; i < numOfObjects; i++)
             {
-                CarArray[i] = new Car(Car.GetVehicleMake(random), Car.GetVehicleModel(random), (CarBodyType)random.Next(6));
+                CarArray[i] = new Car(Car.GetVehicleMake(random), Car.GetVehicleModel(random), (CarBodyType)random.Next(7), random.Next(10000, 50000),
+                    GetRandomYear(),random.Next(250000), random.Next(10, 40));
                 vehicleCollection.Add(CarArray[i]);
             }
         }
@@ -63,8 +66,63 @@ namespace Assignment1
             Bike[] BikeArray = new Bike[numOfObjects];
             for (int i = 0; i < numOfObjects; i++)
             {
-                BikeArray[i] = new Bike(Bike.GetVehicleMake(random), Bike.GetVehicleModel(random), (BikeType)random.Next(6));
+                BikeArray[i] = new Bike(Bike.GetVehicleMake(random), Bike.GetVehicleModel(random), (BikeType)random.Next(6), random.Next(5000, 20000),
+                    GetRandomYear(),random.Next(100000),random.Next(1,12));
                 vehicleCollection.Add(BikeArray[i]);
+            }
+        }
+        private int GetRandomYear()
+        {
+            DateTime presentYear = DateTime.Now;
+            DateTime endYear = new DateTime(presentYear.Year - 10,01,01);
+
+            return random.Next(endYear.Year,presentYear.Year);
+
+        }
+
+        private void listBoxVehicle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Vehicle selectedVehicle = listBoxVehicle.SelectedItem as Vehicle;
+            if (selectedVehicle != null)
+            {
+                textBlockInfo.Text = selectedVehicle.GetDetails();
+            }
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (radioAll.IsChecked == true)
+            {
+                listBoxVehicle.ItemsSource = vehicleCollection;
+            }
+            else if (radioBikes.IsChecked == true)
+            {
+                filteredvehicleCollection.Clear();
+                filterRadioButton("Bike");
+                listBoxVehicle.ItemsSource = filteredvehicleCollection;
+            }
+            else if (radioCars.IsChecked == true)
+            {
+                filteredvehicleCollection.Clear();
+                filterRadioButton("Car");
+                listBoxVehicle.ItemsSource = filteredvehicleCollection;
+            }
+            else if (radioVans.IsChecked == true)
+            {
+                filteredvehicleCollection.Clear();
+                filterRadioButton("Van");
+                listBoxVehicle.ItemsSource = filteredvehicleCollection;
+            }
+        }
+        private void filterRadioButton(string type)
+        {
+            for (int i = 0; i < vehicleCollection.Count; i++)
+            {
+                if (vehicleCollection[i].GetType().Name.ToString() == type)
+                {
+                    Vehicle temp = vehicleCollection[i];
+                    filteredvehicleCollection.Add(temp);
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Assignment1
 
         public VanType BodyType { get; set; }
 
-        public Van(string model, string make, VanType type):base(model, make)
+        public Van(string model, string make, VanType type,int price,int year,int mile,double size):base(model, make, price,year,mile,size)
         {
             BodyType = type;
         }
@@ -42,6 +42,10 @@ namespace Assignment1
             vanMakeIndex = random.Next(0, arrayLength - 1);
 
             return vanMakeArray[vanMakeIndex];
+        }
+        public override string GetDetails()
+        {
+            return String.Format(base.GetDetails() +"Type:\t{0}\n",this.GetType().Name);
         }
     }
 }
