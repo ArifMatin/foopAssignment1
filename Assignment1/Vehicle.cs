@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assignment1
 {
-    public abstract class Vehicle
+    public abstract class Vehicle : IComparable
     {
         public string Make { get; set; }
         public string Model { get; set; }
@@ -26,7 +26,7 @@ namespace Assignment1
             Price = price;
             Year = year;
             Mileage = mile;
-            EngineSize = size /10;
+            EngineSize = size / 10;
 
         }
 
@@ -38,7 +38,39 @@ namespace Assignment1
         public virtual string GetDetails()
         {
             return String.Format("Make:\t{0}\nModel:\t{1}\nPrice:\t{2}\nYear:\t{3}\nMilage:\t{4}\nEgine:\t{5}Litre\n",
-                Make, Model, Price, Year, Mileage,EngineSize);
+                Make, Model, Price, Year, Mileage, EngineSize);
         }
+
+        public int CompareTo(object obj)
+        {
+            Vehicle t = (Vehicle)obj;
+            return this.Make.CompareTo(t.Make);
+        }
+        int IComparable.CompareTo(Object o)
+        {
+            int returnVal;
+            Vehicle temp = (Vehicle)o;
+            if (this.Mileage > temp.Mileage)
+                returnVal = 1;
+
+            else if (this.Mileage < temp.Mileage)
+                returnVal = -1;
+            else
+                returnVal = 0;
+            return returnVal;
+        }
+        //int IComparable.CompareTo(Object o)
+        //{
+        //    int returnVal;
+        //    Vehicle temp = (Vehicle)o;
+        //    if (this.Price > temp.Price)
+        //        returnVal = 1;
+
+        //    else if (this.Price < temp.Price)
+        //        returnVal = -1;
+        //    else
+        //        returnVal = 0;
+        //    return returnVal;
+        //}
     }
 }

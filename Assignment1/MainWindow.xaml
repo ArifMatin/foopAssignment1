@@ -5,20 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="801.527" Width="909.733" Loaded="Window_Loaded">
-    <DockPanel Margin="0,0,0,0">
-        <StackPanel DockPanel.Dock="Top" Height="87" Margin="0,0,0.2,0" Orientation="Horizontal">
+        Title="MainWindow" Height="601.527" Width="909.733" Loaded="Window_Loaded">
+    <DockPanel Margin="0,0,0.2,1">
+        <StackPanel DockPanel.Dock="Top" Height="81" Margin="0,0,0.2,0" Orientation="Horizontal" >
             <RadioButton x:Name="radioAll" Content="All" Margin="5,20" Padding="5" Checked="RadioButton_Checked"/>
             <RadioButton x:Name="radioCars" Content="Cars" Margin="5,20" Padding="5" Checked="RadioButton_Checked"/>
             <RadioButton x:Name="radioBikes" Content="Bikes" Margin="5,20" Padding="5" Checked="RadioButton_Checked"/>
             <RadioButton x:Name="radioVans" Content="Vans" Margin="5,20" Padding="5" Checked="RadioButton_Checked"/>
+            <ComboBox x:Name="comboBoxFilter" Width="120" RenderTransformOrigin="0.996,0.492" SelectionChanged="comboBoxFilter_SelectionChanged"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="76">
+            <Button x:Name="btnEdit" Content="Button" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnEdit_Click"/>
+            <Button x:Name="btnEdit2" Content="Button" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnEdit_Click"/>
+            <Button x:Name="btnEdit3" Content="Button" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnEdit_Click"/>
+            <Button x:Name="btnEdit4" Content="Button" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnEdit_Click"/>
 
         </StackPanel>
-        <Grid Margin="0,0,0.2,-177.2" DockPanel.Dock="Bottom" Height="935">
-            <ListBox x:Name="listBoxVehicle" HorizontalAlignment="Left" Height="409" Margin="41,43,0,0" VerticalAlignment="Top" Width="363" SelectionChanged="listBoxVehicle_SelectionChanged"/>
-            <TextBlock x:Name="textBlockInfo" HorizontalAlignment="Left" Margin="502,196,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="304" Width="310"/>
+        <Grid Margin="0,5.2,0.2,109.2">
+            <ListBox x:Name="listBoxVehicle" HorizontalAlignment="Left" Height="305" Margin="41,43,0,0" VerticalAlignment="Top" Width="363" SelectionChanged="listBoxVehicle_SelectionChanged"/>
+            <TextBlock x:Name="textBlockInfo" HorizontalAlignment="Left" Margin="464,111,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="201" Width="310"/>
 
         </Grid>
+   
     </DockPanel>
 
 

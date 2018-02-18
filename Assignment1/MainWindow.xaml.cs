@@ -38,6 +38,9 @@ namespace Assignment1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            string[] sortBy = {"All","Price", "Mileage", "Make" };
+            comboBoxFilter.ItemsSource = sortBy;
+            comboBoxFilter.SelectedIndex = 0; //Set index to All
             listBoxVehicle.ItemsSource = vehicleCollection;
         }
 
@@ -124,6 +127,42 @@ namespace Assignment1
                     filteredvehicleCollection.Add(temp);
                 }
             }
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string sortType = comboBoxFilter.SelectedValue.ToString();
+
+            if (sortType == "All")
+            {
+                listBoxVehicle.ItemsSource = vehicleCollection;
+            }
+            else if (sortType == "Price")
+            {
+                filteredvehicleCollection.Clear();
+                Array.Sort(vehicleCollection.ToArray());
+                filteredvehicleCollection = vehicleCollection;
+
+            }
+            else if (sortType == "Mileage")
+            {
+                filteredvehicleCollection.Clear();
+
+            }
+            else if (sortType == "Make")
+            {
+                filteredvehicleCollection.Clear();
+
+            }
+        }
+        private void sortPriceNMilage()
+        {
+
         }
     }
 }
