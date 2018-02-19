@@ -21,6 +21,7 @@ namespace Assignment1
     /// </summary>
     public partial class MainWindow : Window
     {
+
         private ObservableCollection<Vehicle> vehicleCollection = new ObservableCollection<Vehicle>();
         private ObservableCollection<Vehicle> filteredvehicleCollection = new ObservableCollection<Vehicle>();
 
@@ -28,20 +29,21 @@ namespace Assignment1
 
         public MainWindow()
         {
+            
             InitializeComponent();
- 
-            CreateVanObjects(random,20);
-            CreateBikeObjects(random, 10);
-            CreateCaranObjects(random,10);
 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            CreateVanObjects(random, 20);
+            CreateBikeObjects(random, 10);
+            CreateCaranObjects(random, 10);
             string[] sortBy = {"All","Price", "Mileage", "Make" };
             comboBoxFilter.ItemsSource = sortBy;
             comboBoxFilter.SelectedIndex = 0; //Set index to All
             listBoxVehicle.ItemsSource = vehicleCollection;
+            radioAll.IsChecked = true;
         }
 
         private void CreateVanObjects(Random random, int numOfObjects)
@@ -96,6 +98,8 @@ namespace Assignment1
         {
             if (radioAll.IsChecked == true)
             {
+                filteredvehicleCollection.Clear();
+                //comboBoxFilter_SelectionChanged();
                 listBoxVehicle.ItemsSource = vehicleCollection;
             }
             else if (radioBikes.IsChecked == true)
@@ -140,23 +144,27 @@ namespace Assignment1
 
             if (sortType == "All")
             {
-                listBoxVehicle.ItemsSource = vehicleCollection;
+                listBoxVehicle.ItemsSource = filteredvehicleCollection;
             }
             else if (sortType == "Price")
             {
-                filteredvehicleCollection.Clear();
-                Array.Sort(vehicleCollection.ToArray());
-                filteredvehicleCollection = vehicleCollection;
+                IEnumerable<Vehicle> filterPrice = filteredvehicleCollection.OrderBy(a => a.Price);
+                filterPrice.Reverse();
+                listBoxVehicle.ItemsSource = filterPrice;
 
             }
             else if (sortType == "Mileage")
             {
-                filteredvehicleCollection.Clear();
+                IEnumerable<Vehicle> filterMilage = filteredvehicleCollection.OrderBy(a => a.Mileage);
+                filterMilage.Reverse();
+                listBoxVehicle.ItemsSource = filterMilage;
 
             }
             else if (sortType == "Make")
             {
-                filteredvehicleCollection.Clear();
+                IEnumerable<Vehicle> filterMkee = filteredvehicleCollection.OrderBy(a => a.Make);
+                filterMkee.Reverse();
+                listBoxVehicle.ItemsSource = filterMkee;
 
             }
         }
