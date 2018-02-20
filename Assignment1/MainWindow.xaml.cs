@@ -23,7 +23,9 @@ namespace Assignment1
     {
 
         private ObservableCollection<Vehicle> vehicleCollection = new ObservableCollection<Vehicle>();
-        private ObservableCollection<Vehicle> filteredvehicleCollection = new ObservableCollection<Vehicle>();
+        private ObservableCollection<Vehicle> filteredvehicleCollection;
+        private Vehicle[][] filterVehicle = new Vehicle[4][];
+        private int selectedIndexOfRadio;
 
         public Random random = new Random();
 
@@ -44,6 +46,7 @@ namespace Assignment1
             comboBoxFilter.SelectedIndex = 0; //Set index to All
             listBoxVehicle.ItemsSource = vehicleCollection;
             radioAll.IsChecked = true;
+            selectedIndexOfRadio = 0;
         }
 
         private void CreateVanObjects(Random random, int numOfObjects)
@@ -98,44 +101,46 @@ namespace Assignment1
         {
             if (radioAll.IsChecked == true)
             {
-                filteredvehicleCollection.Clear();
-                //comboBoxFilter_SelectionChanged();
-                listBoxVehicle.ItemsSource = vehicleCollection;
+                filterVehicle[0] = vehicleCollection.ToArray();
+                filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[0]);
+                listBoxVehicle.ItemsSource = filteredvehicleCollection;                 //all is 0
             }
             else if (radioBikes.IsChecked == true)
             {
-                filteredvehicleCollection.Clear();
-                filterRadioButton("Bike");
+                filterVehicle[1] =  filterRadioButton("Bike");                          //bike is 1
+                filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[1]);
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;
+                selectedIndexOfRadio = 1;
             }
             else if (radioCars.IsChecked == true)
             {
-                filteredvehicleCollection.Clear();
-                filterRadioButton("Car");
+                filterVehicle[2] =  filterRadioButton("Car");                           //car is 2
+                filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[2]);
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;
+                selectedIndexOfRadio = 2;
             }
             else if (radioVans.IsChecked == true)
             {
-                filteredvehicleCollection.Clear();
-                filterRadioButton("Van");
+                filterVehicle[3] =  filterRadioButton("Van");                           //van is 3
+                filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[3]);
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;
+                selectedIndexOfRadio = 3;
             }
         }
-        private void filterRadioButton(string type)
+        private Vehicle[] filterRadioButton(string type)
         {
+            List<Vehicle> tempArray = new List<Vehicle>();
+
             for (int i = 0; i < vehicleCollection.Count; i++)
             {
                 if (vehicleCollection[i].GetType().Name.ToString() == type)
                 {
                     Vehicle temp = vehicleCollection[i];
-                    filteredvehicleCollection.Add(temp);
+                    tempArray.Add(temp);
                 }
             }
-        }
 
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-
+            return tempArray.ToArray();
         }
 
         private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -144,33 +149,40 @@ namespace Assignment1
 
             if (sortType == "All")
             {
-                listBoxVehicle.ItemsSource = filteredvehicleCollection;
+                listBoxVehicle.ItemsSource = filterVehicle[selectedIndexOfRadio];
             }
             else if (sortType == "Price")
             {
-                IEnumerable<Vehicle> filterPrice = filteredvehicleCollection.OrderBy(a => a.Price);
+                IEnumerable<Vehicle> filterPrice = filterVehicle[selectedIndexOfRadio].OrderBy(a => a.Price);
                 filterPrice.Reverse();
                 listBoxVehicle.ItemsSource = filterPrice;
 
             }
             else if (sortType == "Mileage")
             {
-                IEnumerable<Vehicle> filterMilage = filteredvehicleCollection.OrderBy(a => a.Mileage);
+                IEnumerable<Vehicle> filterMilage = filterVehicle[selectedIndexOfRadio].OrderBy(a => a.Mileage);
                 filterMilage.Reverse();
                 listBoxVehicle.ItemsSource = filterMilage;
 
             }
             else if (sortType == "Make")
             {
-                IEnumerable<Vehicle> filterMkee = filteredvehicleCollection.OrderBy(a => a.Make);
+                IEnumerable<Vehicle> filterMkee = filterVehicle[selectedIndexOfRadio].OrderBy(a => a.Make);
                 filterMkee.Reverse();
                 listBoxVehicle.ItemsSource = filterMkee;
 
             }
         }
-        private void sortPriceNMilage()
-        {
 
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Vehicle selectedVehicle = listBoxVehicle.SelectedItem as Vehicle;
+            if (selectedVehicle != null)
+            {
+                int x = filteredvehicleCollection.IndexOf(selectedVehicle);
+                filteredvehicleCollection.RemoveAt(x);
+                textBlockInfo.Text = String.Empty;
+            }
         }
     }
 }
