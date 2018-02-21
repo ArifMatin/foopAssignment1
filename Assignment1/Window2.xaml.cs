@@ -22,6 +22,17 @@ namespace Assignment1
         public Window2()
         {
             InitializeComponent();
+
+            
+        }
+        public void ShowDetails(Vehicle c)
+        {
+            txtMake.Text = c.Make;
+            txtModel.Text = c.Model;
+            txtPrice.Text = c.Price.ToString();
+            txtYear.Text = c.Year.ToString();
+            txtMileage.Text = c.Mileage.ToString();
+           // txtBodyType.Text = c.BodyType;                      //bodytype is not in vehicle class
         }
     }
 }

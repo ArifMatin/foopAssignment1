@@ -22,10 +22,10 @@ namespace Assignment1
     public partial class MainWindow : Window
     {
 
-        private ObservableCollection<Vehicle> vehicleCollection = new ObservableCollection<Vehicle>();
-        private ObservableCollection<Vehicle> filteredvehicleCollection;
-        private Vehicle[][] filterVehicle = new Vehicle[4][];
-        private int selectedIndexOfRadio;
+        public ObservableCollection<Vehicle> vehicleCollection = new ObservableCollection<Vehicle>();
+        public ObservableCollection<Vehicle> filteredvehicleCollection;
+        public Vehicle[][] filterVehicle = new Vehicle[4][];
+        public int selectedIndexOfRadio;
 
         public Random random = new Random();
 
@@ -190,6 +190,11 @@ namespace Assignment1
         {
             Window2 edit = new Window2();   // create new window and set onwer
             edit.Owner = this;
+
+            Vehicle selectedVehicle = listBoxVehicle.SelectedItem as Vehicle;
+
+            edit.ShowDetails(selectedVehicle);
+
             edit.ShowDialog();
         }
     }
