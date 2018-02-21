@@ -27,6 +27,7 @@ namespace Assignment1
         }
         public void ShowDetails(Vehicle c)
         {
+            string name = c.GetType().Name;
             txtMake.Text = c.Make;
             txtModel.Text = c.Model;
             txtPrice.Text = c.Price.ToString();
