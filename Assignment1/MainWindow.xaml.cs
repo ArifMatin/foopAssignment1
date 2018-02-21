@@ -39,7 +39,7 @@ namespace Assignment1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             CreateVanObjects(random, 20);
-            CreateBikeObjects(random, 10);
+            CreateBikeObjects(random, 5);
             CreateCaranObjects(random, 10);
             string[] sortBy = {"All","Price", "Mileage", "Make" };
             comboBoxFilter.ItemsSource = sortBy;
@@ -99,10 +99,10 @@ namespace Assignment1
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (radioAll.IsChecked == true)
+            if (radioAll.IsChecked == true)                                                 //checks which radio is checked
             {
-                filterVehicle[0] = vehicleCollection.ToArray();
-                filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[0]);
+                filterVehicle[0] = vehicleCollection.ToArray();                                     //stores it in an jaggered array
+                filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[0]);    //displays that as an ObservableCollection 
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;                 //all is 0
             }
             else if (radioBikes.IsChecked == true)
@@ -110,7 +110,7 @@ namespace Assignment1
                 filterVehicle[1] =  filterRadioButton("Bike");                          //bike is 1
                 filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[1]);
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;
-                selectedIndexOfRadio = 1;
+                selectedIndexOfRadio = 1;                                                   //this is used for comboxselection
             }
             else if (radioCars.IsChecked == true)
             {
@@ -127,7 +127,7 @@ namespace Assignment1
                 selectedIndexOfRadio = 3;
             }
         }
-        private Vehicle[] filterRadioButton(string type)
+        private Vehicle[] filterRadioButton(string type) // send value down and comnpares the values n sends an array bk
         {
             List<Vehicle> tempArray = new List<Vehicle>();
 
@@ -145,7 +145,7 @@ namespace Assignment1
 
         private void comboBoxFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string sortType = comboBoxFilter.SelectedValue.ToString();
+            string sortType = comboBoxFilter.SelectedValue.ToString();                          //gets value of sortType
 
             if (sortType == "All")
             {
@@ -153,7 +153,7 @@ namespace Assignment1
             }
             else if (sortType == "Price")
             {
-                IEnumerable<Vehicle> filterPrice = filterVehicle[selectedIndexOfRadio].OrderBy(a => a.Price);
+                IEnumerable<Vehicle> filterPrice = filterVehicle[selectedIndexOfRadio].OrderBy(a => a.Price);           //sorts by the order type
                 filterPrice.Reverse();
                 listBoxVehicle.ItemsSource = filterPrice;
 
@@ -179,10 +179,18 @@ namespace Assignment1
             Vehicle selectedVehicle = listBoxVehicle.SelectedItem as Vehicle;
             if (selectedVehicle != null)
             {
-                int x = filteredvehicleCollection.IndexOf(selectedVehicle);
-                filteredvehicleCollection.RemoveAt(x);
+                int x = vehicleCollection.IndexOf(selectedVehicle); // this removes from collection of vehicles
+                vehicleCollection.RemoveAt(x);
                 textBlockInfo.Text = String.Empty;
+                RadioButton_Checked(sender,e);  //this call the radio changed method which updates the ObservableCollection and the view.
             }
+        }
+
+        private void btnEdit3_Click(object sender, RoutedEventArgs e)
+        {
+            Window2 edit = new Window2();   // create new window and set onwer
+            edit.Owner = this;
+            edit.ShowDialog();
         }
     }
 }

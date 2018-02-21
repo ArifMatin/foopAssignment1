@@ -4,6 +4,29 @@
              xmlns:local="clr-namespace:Assignment1"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate x:Key="listboxTemplate">
+            <Border Background="LightBlue" BorderBrush="Black" BorderThickness="2" CornerRadius="15" Padding="5">
+                <StackPanel >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Make: " Background="Blue" Margin="5"/>
+                        <TextBlock Text="{Binding Make}" Background="Yellow" Margin="5"/>
+                        <TextBlock Text="Model: " Margin="5"/>
+                        <TextBlock Text="{Binding Model}" Margin="5"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Background="Red" >
+                        <TextBlock Text="Price: " Margin="5"/>
+                        <TextBlock Text="{Binding Price}" Margin="5" Background="Bisque"/>
+                        <TextBlock Text="Mileage: " Margin="5"/>
+                        <TextBlock Text="{Binding Mileage}" Margin="5"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+        </DataTemplate>
+        <Style x:Key="btnStyle1" TargetType="Button">
+            <Setter Property="Background" Value="ForestGreen"/>
+            <Setter Property="Foreground" Value="Green"/>
+        </Style>
     </Application.Resources>
 </Application>
