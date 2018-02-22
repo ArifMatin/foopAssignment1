@@ -44,12 +44,12 @@
         <TextBox Grid.Column="1" Grid.Row="4" Name="txtYear" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="5" Name="txtColour" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="6" Name="txtMileage" Text="" Margin="10,5,10,5"/>
-        <ComboBox Grid.Column="1" Grid.Row="7" Name="txtBodyType" Margin="10,5,10,5"/>
+        <ComboBox Grid.Column="1" Grid.Row="7" Name="comboBoxType" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="8" Name="txtDescription" Text="" Margin="10,5,10,5" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="9" Grid.Column="1" Name="textImage" Text="" Margin="10,5,10,5"/>
 
         <Button Name="btnSelectImage" Grid.Column="1" Grid.Row="10" Content="Select Image" Margin="30,0,30,10"/>
-        <Button Name="btnAdd" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Content="ADD"  Margin="40,5,100,5"/>
+        <Button Name="btnAdd" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Content="ADD"  Margin="40,5,100,5" Click="btnAdd_Click"/>
         <Button Name="btnCancel" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="3" Content="Cancel" Margin="100,5,40,5"/>
 
 

@@ -19,37 +19,46 @@ namespace Assignment1
     /// </summary>
     public partial class Window2 : Window
     {
+        public Vehicle vehicle { get; set; }
         public Window2()
         {
             InitializeComponent();
-            
-        }
-        public void ShowDetails(Vehicle c)
-        {
-            GetVehicleType(c);
 
-            string name = c.GetType().Name;
-            txtMake.Text = c.Make;
-            txtModel.Text = c.Model;
-            txtPrice.Text = c.Price.ToString();
-            txtYear.Text = c.Year.ToString();
-            txtMileage.Text = c.Mileage.ToString();
-           // txtBodyType.Text = c.BodyType;                      //bodytype is not in vehicle class
         }
-        public void GetVehicleType(Vehicle c)
+        public void ShowDetails()
         {
-            if (c.GetType().Name == "Car")
+            GetVehicleType();
+
+            string name = vehicle.GetType().Name;
+            txtMake.Text = vehicle.Make;
+            txtModel.Text = vehicle.Model;
+            txtPrice.Text = vehicle.Price.ToString();
+            txtYear.Text = vehicle.Year.ToString();
+            txtMileage.Text = vehicle.Mileage.ToString();
+        }
+        public void GetVehicleType()
+        {
+
+            if (vehicle.GetType().Name == "Car")
             {
-                c = c as Car;
+                vehicle = vehicle as Car;
+                comboBoxType.ItemsSource = Enum.GetValues(typeof(CarBodyType));
             }
-            else if (c.GetType().Name == "Van")
+            else if (vehicle.GetType().Name == "Van")
             {
-                c = c as Van;
+                vehicle = vehicle as Van;
+                comboBoxType.ItemsSource = Enum.GetValues(typeof(VanType));
             }
-            else if (c.GetType().Name == "Bike")
+            else if (vehicle.GetType().Name == "Bike")
             {
-                c = c as Bike;
+                vehicle = vehicle as Bike;
+                comboBoxType.ItemsSource = Enum.GetValues(typeof(BikeType));
             }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            string make = txtMake.Text;
         }
     }
 }

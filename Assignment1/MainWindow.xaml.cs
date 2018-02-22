@@ -188,13 +188,12 @@ namespace Assignment1
 
         private void btnEdit3_Click(object sender, RoutedEventArgs e)
         {
-            Window2 edit = new Window2();   // create new window and set onwer
-            edit.Owner = this;
-
             Vehicle selectedVehicle = listBoxVehicle.SelectedItem as Vehicle;
-
-            edit.ShowDetails(selectedVehicle);
-
+            Window2 edit = new Window2();                                               // create new window and set onwer
+            edit.Owner = this;
+            edit.vehicle = selectedVehicle;
+            edit.ShowDetails();
+          
             edit.ShowDialog();
         }
     }
