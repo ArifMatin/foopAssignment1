@@ -44,7 +44,7 @@
         <TextBox Grid.Column="1" Grid.Row="4" Name="txtYear" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="5" Name="txtColour" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="6" Name="txtMileage" Text="" Margin="10,5,10,5"/>
-        <TextBox Grid.Column="1" Grid.Row="7" Name="txtBodyType" Text="" Margin="10,5,10,5"/>
+        <ComboBox Grid.Column="1" Grid.Row="7" Name="txtBodyType" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="8" Name="txtDescription" Text="" Margin="10,5,10,5" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="9" Grid.Column="1" Name="textImage" Text="" Margin="10,5,10,5"/>
 
