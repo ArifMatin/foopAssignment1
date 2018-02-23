@@ -38,15 +38,16 @@ namespace Assignment1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateVanObjects(random, 20);
-            CreateBikeObjects(random, 5);
-            CreateCaranObjects(random, 10);
+            CreateVanObjects(random, 2);
+            CreateBikeObjects(random, 2);
+            CreateCaranObjects(random, 2);
             string[] sortBy = {"All","Price", "Mileage", "Make" };
-            comboBoxFilter.ItemsSource = sortBy;
-            comboBoxFilter.SelectedIndex = 0; //Set index to All
+            
             listBoxVehicle.ItemsSource = vehicleCollection;
             radioAll.IsChecked = true;
             selectedIndexOfRadio = 0;
+            comboBoxFilter.ItemsSource = sortBy;
+            comboBoxFilter.SelectedIndex = 0; //Set index to All
         }
 
         private void CreateVanObjects(Random random, int numOfObjects)
@@ -55,7 +56,7 @@ namespace Assignment1
             for (int i = 0; i < numOfObjects; i++)
             {
                 vanArray[i] = new Van(Van.GetVehicleMake(random), Van.GetVehicleModel(random), (VanType)random.Next(6), random.Next(10000,30000),
-                    GetRandomYear(),random.Next(300000), random.Next(10, 30));
+                    GetRandomYear(),random.Next(300000), random.Next(10, 30),(WheelBase)random.Next(4),"Nice vehicle");
                 vehicleCollection.Add(vanArray[i]);
             }
         }
@@ -65,7 +66,7 @@ namespace Assignment1
             for (int i = 0; i < numOfObjects; i++)
             {
                 CarArray[i] = new Car(Car.GetVehicleMake(random), Car.GetVehicleModel(random), (CarBodyType)random.Next(7), random.Next(10000, 50000),
-                    GetRandomYear(),random.Next(250000), random.Next(10, 40));
+                    GetRandomYear(),random.Next(250000), random.Next(10, 40), "Nice vehicle");
                 vehicleCollection.Add(CarArray[i]);
             }
         }
@@ -75,7 +76,7 @@ namespace Assignment1
             for (int i = 0; i < numOfObjects; i++)
             {
                 BikeArray[i] = new Bike(Bike.GetVehicleMake(random), Bike.GetVehicleModel(random), (BikeType)random.Next(6), random.Next(5000, 20000),
-                    GetRandomYear(),random.Next(100000),random.Next(1,12));
+                    GetRandomYear(),random.Next(100000),random.Next(1,12), "Nice vehicle");
                 vehicleCollection.Add(BikeArray[i]);
             }
         }
@@ -104,6 +105,7 @@ namespace Assignment1
                 filterVehicle[0] = vehicleCollection.ToArray();                                     //stores it in an jaggered array
                 filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[0]);    //displays that as an ObservableCollection 
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;                 //all is 0
+                selectedIndexOfRadio = 0;
             }
             else if (radioBikes.IsChecked == true)
             {
@@ -193,8 +195,19 @@ namespace Assignment1
             edit.Owner = this;
             edit.vehicle = selectedVehicle;
             edit.ShowDetails();
-          
+
             edit.ShowDialog();
+
+            RadioButton_Checked(sender, e);
+            textBlockInfo.Text = selectedVehicle.GetDetails();
+
+        }
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Vehicle newVechilep;
+            Window2 addVehicloe = new Window2();
+            addVehicloe.Owner = this;
+
         }
     }
 }

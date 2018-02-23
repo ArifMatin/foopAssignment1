@@ -15,7 +15,7 @@
             <ComboBox x:Name="comboBoxFilter" Width="120" RenderTransformOrigin="0.996,0.492" SelectionChanged="comboBoxFilter_SelectionChanged"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="76">
-            <Button x:Name="btnEdit" Content="Button" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
+            <Button x:Name="btnAdd" Content="ADD" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
             <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnDelete_Click" Style="{StaticResource btnStyle1}"/>
             <Button x:Name="btnEdit3" Content="Edit" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnEdit3_Click"/>
 

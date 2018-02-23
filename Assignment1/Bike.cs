@@ -14,7 +14,7 @@ namespace Assignment1
 
         public BikeType BodyType { get; set; }
 
-        public Bike (string model, string make, BikeType type, int price,int year,int mile,double size):base(model, make,price,year,mile,size)
+        public Bike (string model, string make, BikeType type, int price,int year,int mile,double size,string des):base(model, make,price,year,mile,size,des)
         {
             BodyType = type;
         }

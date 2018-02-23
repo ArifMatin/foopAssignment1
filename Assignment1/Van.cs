@@ -7,15 +7,21 @@ using System.Threading.Tasks;
 namespace Assignment1
 {
     public enum VanType { CombiVan,Dropside, PanelVan, Pickup,Tripper,Unlisted };
+
+    public enum WheelBase { Short, Medium, Long, Unlisted};
+
     class Van : Vehicle
     {
         public static int vanMakeIndex;
 
         public VanType BodyType { get; set; }
 
-        public Van(string model, string make, VanType type,int price,int year,int mile,double size):base(model, make, price,year,mile,size)
+        public WheelBase Wheelbase { get; set; }
+
+        public Van(string model, string make, VanType type,int price,int year,int mile,double size, WheelBase wheel,string des):base(model, make, price,year,mile,size,des)
         {
             BodyType = type;
+            Wheelbase = wheel;
         }
 
         public override string ToString()

@@ -19,7 +19,7 @@ namespace Assignment1
         public string ImageName { get; set; }
         public double EngineSize { get; set; }
 
-        public Vehicle(string make, string model, int price, int year, int mile, double size)
+        public Vehicle(string make, string model, int price, int year, int mile, double size,string des)
         {
             Make = make;
             Model = model;
@@ -27,6 +27,7 @@ namespace Assignment1
             Year = year;
             Mileage = mile;
             EngineSize = size / 10;
+            Description = des;
 
         }
 
@@ -37,8 +38,8 @@ namespace Assignment1
 
         public virtual string GetDetails()
         {
-            return String.Format("Make:\t{0}\nModel:\t{1}\nPrice:\t{2}\nYear:\t{3}\nMilage:\t{4}\nEgine:\t{5}Litre\n",
-                Make, Model, Price, Year, Mileage, EngineSize);
+            return String.Format("Make:\t{0}\nModel:\t{1}\nPrice:\t{2}\nYear:\t{3}\nMilage:\t{4}\nDescription: {6}\nEgine:\t{5}Litre\n",
+                Make, Model, Price, Year, Mileage, EngineSize,Description);
         }
     }
 }

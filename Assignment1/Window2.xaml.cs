@@ -29,36 +29,59 @@ namespace Assignment1
         {
             GetVehicleType();
 
-            string name = vehicle.GetType().Name;
             txtMake.Text = vehicle.Make;
             txtModel.Text = vehicle.Model;
             txtPrice.Text = vehicle.Price.ToString();
             txtYear.Text = vehicle.Year.ToString();
             txtMileage.Text = vehicle.Mileage.ToString();
+            txtDescription.Text = vehicle.Description;
         }
         public void GetVehicleType()
         {
 
             if (vehicle.GetType().Name == "Car")
             {
-                vehicle = vehicle as Car;
+                Car tempcar = (Car)vehicle;
                 comboBoxType.ItemsSource = Enum.GetValues(typeof(CarBodyType));
+                comboBoxType.SelectedIndex = (int)tempcar.BodyType;
             }
             else if (vehicle.GetType().Name == "Van")
             {
-                vehicle = vehicle as Van;
+                Van tempvan = (Van)vehicle;
                 comboBoxType.ItemsSource = Enum.GetValues(typeof(VanType));
+                comboBoxType.SelectedIndex = (int)tempvan.BodyType;
             }
             else if (vehicle.GetType().Name == "Bike")
             {
-                vehicle = vehicle as Bike;
+                Bike tempbike = (Bike)vehicle;
                 comboBoxType.ItemsSource = Enum.GetValues(typeof(BikeType));
+                comboBoxType.SelectedIndex = (int)tempbike.BodyType;
             }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
+        { 
+            vehicle.Make = txtMake.Text;
+            vehicle.Model = txtModel.Text;
+            vehicle.Mileage = Convert.ToInt32(txtMileage.Text);
+            vehicle.Price = Convert.ToInt32(txtPrice.Text);
+            vehicle.Year = Convert.ToInt32(txtYear.Text);
+            vehicle.Description = txtDescription.Text;
+            //bodytype and wheelbase.
+            this.Close();
+        }
+        private void ReadInDeatils()
         {
             string make = txtMake.Text;
+            string model = txtModel.Text;
+            int mileage = Convert.ToInt32(txtMileage.Text);
+            int price = Convert.ToInt32(txtPrice.Text);
+            int year = Convert.ToInt32(txtYear.Text);
+            string description = txtDescription.Text;
+        }
+        private void fhy()
+        {
+            //combo vehicle type then cretate new type vehicle, run getypye method to display enum
         }
     }
 }
