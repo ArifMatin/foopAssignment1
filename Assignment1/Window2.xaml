@@ -26,7 +26,8 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Editing Car" Grid.Row="0" Grid.Column="1" Margin="50,0,50,0"/>
+        <Label x:Name="labelEdit" Content="Editing Car" Grid.Row="0" Grid.Column="1" Margin="50,0,50,0" Visibility="Hidden"/>
+        <Label x:Name="labelAddVehicle" Content="Add Vehicle" Grid.Row="0" Grid.Column="1" Margin="50,0,50,0" Visibility="Hidden"/>
 
         <Label Content="Make" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0"/>
         <Label Content="Model" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
@@ -44,7 +45,7 @@
         <TextBox Grid.Column="1" Grid.Row="4" Name="txtYear" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="5" Name="txtColour" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="6" Name="txtMileage" Text="" Margin="10,5,10,5"/>
-        <ComboBox Grid.Column="1" Grid.Row="7" Name="comboBoxType" Margin="10,5,10,5"/>
+        <ComboBox Grid.Column="1" Grid.Row="7" Name="comboBoxType" Margin="10,5,10,5" SelectionChanged="comboBoxType_SelectionChanged"/>
         <TextBox Grid.Column="1" Grid.Row="8" Name="txtDescription" Text="" Margin="10,5,10,5" Grid.ColumnSpan="2"/>
         <TextBox Grid.Row="9" Grid.Column="1" Name="textImage" Text="" Margin="10,5,10,5" IsReadOnly="True"/>
         <Button Name="btnSelectImage" Grid.Column="1" Grid.Row="10" Content="Select Image" Margin="30,0,30,10"/>

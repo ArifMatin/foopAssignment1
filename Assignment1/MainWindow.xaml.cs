@@ -204,9 +204,11 @@ namespace Assignment1
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Vehicle newVechilep;
             Window2 addVehicloe = new Window2();
             addVehicloe.Owner = this;
+
+            addVehicloe.fhy();
+            addVehicloe.ShowDialog();
 
         }
     }

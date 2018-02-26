@@ -20,6 +20,10 @@ namespace Assignment1
     public partial class Window2 : Window
     {
         public Vehicle vehicle { get; set; }
+        private Car tempcar;
+        private Bike tempbike;
+        private Van tempvan;
+
         public Window2()
         {
             InitializeComponent();
@@ -27,6 +31,9 @@ namespace Assignment1
         }
         public void ShowDetails()
         {
+            labelAddVehicle.Visibility = Visibility.Hidden;
+            labelEdit.Visibility = Visibility.Visible;
+
             GetVehicleType();
 
             txtMake.Text = vehicle.Make;
@@ -36,37 +43,45 @@ namespace Assignment1
             txtMileage.Text = vehicle.Mileage.ToString();
             txtDescription.Text = vehicle.Description;
         }
-        public void GetVehicleType()
+        private void GetVehicleType()
         {
 
             if (vehicle.GetType().Name == "Car")
             {
-                Car tempcar = (Car)vehicle;
+                tempcar = (Car)vehicle;
                 comboBoxType.ItemsSource = Enum.GetValues(typeof(CarBodyType));
                 comboBoxType.SelectedIndex = (int)tempcar.BodyType;
             }
             else if (vehicle.GetType().Name == "Van")
             {
-                Van tempvan = (Van)vehicle;
+                tempvan = (Van)vehicle;
                 comboBoxType.ItemsSource = Enum.GetValues(typeof(VanType));
                 comboBoxType.SelectedIndex = (int)tempvan.BodyType;
             }
             else if (vehicle.GetType().Name == "Bike")
             {
-                Bike tempbike = (Bike)vehicle;
+                tempbike = (Bike)vehicle;
                 comboBoxType.ItemsSource = Enum.GetValues(typeof(BikeType));
                 comboBoxType.SelectedIndex = (int)tempbike.BodyType;
             }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
-        { 
-            vehicle.Make = txtMake.Text;
-            vehicle.Model = txtModel.Text;
-            vehicle.Mileage = Convert.ToInt32(txtMileage.Text);
-            vehicle.Price = Convert.ToInt32(txtPrice.Text);
-            vehicle.Year = Convert.ToInt32(txtYear.Text);
-            vehicle.Description = txtDescription.Text;
+        {
+            if (labelEdit.Visibility == Visibility.Visible)
+            {
+                vehicle.Make = txtMake.Text;                //make method to show add details
+                vehicle.Model = txtModel.Text;
+                vehicle.Mileage = Convert.ToInt32(txtMileage.Text);
+                vehicle.Price = Convert.ToInt32(txtPrice.Text);
+                vehicle.Year = Convert.ToInt32(txtYear.Text);
+                vehicle.Description = txtDescription.Text;
+            }
+            else if (labelAddVehicle.Visibility == Visibility.Visible)
+            {
+                //code
+            }
+           
             //bodytype and wheelbase.
             this.Close();
         }
@@ -79,9 +94,18 @@ namespace Assignment1
             int year = Convert.ToInt32(txtYear.Text);
             string description = txtDescription.Text;
         }
-        private void fhy()
+        public void fhy()
         {
+            labelEdit.Visibility = Visibility.Hidden;
+            labelAddVehicle.Visibility = Visibility.Visible;
             //combo vehicle type then cretate new type vehicle, run getypye method to display enum
+        }
+
+        private void comboBoxType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int x = comboBoxType.SelectedIndex;
+            tempcar.BodyType = (CarBodyType)x;
+
         }
     }
 }
