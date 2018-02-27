@@ -207,9 +207,10 @@ namespace Assignment1
             Window2 addVehicloe = new Window2();
             addVehicloe.Owner = this;
 
-            addVehicloe.fhy();
+            addVehicloe.NewVehicle();
             addVehicloe.ShowDialog();
 
+            RadioButton_Checked(sender, e);
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Assignment1"
         mc:Ignorable="d"
-        Title="Window2" Height="500" Width="350">
+        Title="Window2" Height="550" Width="380" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,6 +20,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -27,7 +28,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="labelEdit" Content="Editing Car" Grid.Row="0" Grid.Column="1" Margin="50,0,50,0" Visibility="Hidden"/>
-        <Label x:Name="labelAddVehicle" Content="Add Vehicle" Grid.Row="0" Grid.Column="1" Margin="50,0,50,0" Visibility="Hidden"/>
+        <Label x:Name="labelAddVehicle" Content="Add Vehicle" Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" Visibility="Hidden"/>
+        <ComboBox Name="comboAddVehicle" Grid.Column="1" Grid.Row="0" Margin="10,5,10,5" Visibility="Hidden" SelectionChanged="comboAddVehicle_SelectionChanged"/>
 
         <Label Content="Make" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0"/>
         <Label Content="Model" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
@@ -37,7 +39,7 @@
         <Label Content="Mileage" Grid.Row="6" Grid.Column="0" Margin="10,0,0,0"/>
         <Label Content="Body Type" Grid.Row="7" Grid.Column="0" Margin="10,0,0,0"/>
         <Label Content="Description" Grid.Row="8" Grid.Column="0" Margin="10,0,0,0"/>
-        <Label Content="Image" Grid.Row="9" Grid.Column="0" Margin="10,0,0,0"/>
+        <Label Content="Image" Grid.Row="10" Grid.Column="0" Margin="10,0,0,0"/>
 
         <TextBox Grid.Column="1" Grid.Row="1" Name="txtMake" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="2" Name="txtModel" Text="" Margin="10,5,10,5"/>
@@ -45,13 +47,15 @@
         <TextBox Grid.Column="1" Grid.Row="4" Name="txtYear" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="5" Name="txtColour" Text="" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="6" Name="txtMileage" Text="" Margin="10,5,10,5"/>
-        <ComboBox Grid.Column="1" Grid.Row="7" Name="comboBoxType" Margin="10,5,10,5" SelectionChanged="comboBoxType_SelectionChanged"/>
+        <ComboBox Grid.Column="1" Grid.Row="7" Name="comboBoxType" Margin="10,5,10,5"/>
         <TextBox Grid.Column="1" Grid.Row="8" Name="txtDescription" Text="" Margin="10,5,10,5" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="9" Grid.Column="1" Name="textImage" Text="" Margin="10,5,10,5" IsReadOnly="True"/>
-        <Button Name="btnSelectImage" Grid.Column="1" Grid.Row="10" Content="Select Image" Margin="30,0,30,10"/>
-        <Button Name="btnAdd" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="2" Content="ADD"  Margin="40,5,100,5" Click="btnAdd_Click"/>
-        <Button Name="btnCancel" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="3" Content="Cancel" Margin="100,5,40,5"/>
+        <TextBox Grid.Row="10" Grid.Column="1" Name="textImage" Text="" Margin="10,5,10,5" IsReadOnly="True"/>
+        <Button Name="btnSelectImage" Grid.Column="1" Grid.Row="11" Content="Select Image" Margin="30,0,30,10"/>
+        <Button Name="btnAdd" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="2" Content="ADD"  Margin="40,5,100,5" Click="btnAdd_Click"/>
+        <Button Name="btnCancel" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="3" Content="Cancel" Margin="100,5,40,5"/>
 
+        <Label Name="labelWheelbase" Content="WheehlBase" Grid.Row="9" Grid.Column="0"  Margin="10,0,0,0" Visibility="Hidden" />
+        <ComboBox Grid.Column="1" Grid.Row="9" Name="comboWheelBse" Margin="10,5,10,5" Visibility="Hidden"/>
 
     </Grid>
 </Window>
