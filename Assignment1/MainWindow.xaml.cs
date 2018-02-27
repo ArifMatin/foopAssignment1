@@ -100,7 +100,7 @@ namespace Assignment1
                 TypeNameHandling = TypeNameHandling.All
             };
 
-            using (StreamReader r = new StreamReader("colour.json"))
+            using (StreamReader r = new StreamReader("./colour.json"))
             {
                 string json = r.ReadToEnd();
                 colourList =  JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
