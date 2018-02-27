@@ -19,7 +19,7 @@ namespace Assignment1
         public string ImageName { get; set; }
         public double EngineSize { get; set; }
 
-        public Vehicle(string make, string model, int price, int year, int mile, double size,string des)
+        public Vehicle(string make, string model, int price, int year, int mile, double size,string des,string color)
         {
             Make = make;
             Model = model;
@@ -28,6 +28,7 @@ namespace Assignment1
             Mileage = mile;
             EngineSize = size / 10;
             Description = des;
+            Colour = color;
 
         }
 

@@ -30,6 +30,8 @@ namespace Assignment1
         private int price = 0;
         private int year = 0;
         private string description = "";
+        private string[] colors;
+        private string color = ""; // read in the colors and show in combox
 
         public Window2()
         {
@@ -43,6 +45,7 @@ namespace Assignment1
             comboAddVehicle.Visibility = Visibility.Hidden;
 
             GetVehicleType();
+            ShowColorList();
 
             txtMake.Text = vehicle.Make;
             txtModel.Text = vehicle.Model;
@@ -51,9 +54,21 @@ namespace Assignment1
             txtMileage.Text = vehicle.Mileage.ToString();
             txtDescription.Text = vehicle.Description;
 
+
+            int x = Array.IndexOf(colors, vehicle.Colour.ToString());
+            comboColor.SelectedIndex = x;
+
+
             string type = vehicle.GetType().Name;
             ShowComboBoxBodyType(type);
 
+
+        }
+        private void ShowColorList()
+        {
+            MainWindow m = Owner as MainWindow;
+            colors = m.colourList.Keys.ToArray();
+            comboColor.ItemsSource = colors;
 
         }
         private void GetVehicleType()
@@ -98,6 +113,7 @@ namespace Assignment1
             price = Convert.ToInt32(txtPrice.Text);
             year = Convert.ToInt32(txtYear.Text);
             description = txtDescription.Text;
+            color = comboColor.SelectedItem.ToString();
         }
         private void AssignVales()
         {
@@ -107,6 +123,7 @@ namespace Assignment1
             vehicle.Price = price;
             vehicle.Year = year;
             vehicle.Description = description;
+            vehicle.Colour = color;
         }
         private void AssignComboSelection()
         {
@@ -155,6 +172,8 @@ namespace Assignment1
             labelEdit.Visibility = Visibility.Hidden;
             labelAddVehicle.Visibility = Visibility.Visible;
             comboAddVehicle.Visibility = Visibility.Visible;
+            ShowColorList();
+            comboColor.SelectedIndex = 0;
             //combo vehicle type then cretate new type vehicle, run getypye method to display enum
 
         }
@@ -196,15 +215,15 @@ namespace Assignment1
 
             if (type == "Car")
             {
-                tempcar = new Car(model,make,CarBodyType.Convertible,price,year,mileage,0,description);
+                tempcar = new Car(model,make,CarBodyType.Convertible,price,year,mileage,0,description,color);
             }
             else if (type == "Van")
             {
-                tempvan = new Van(model, make,VanType.Dropside, price, year, mileage, 0,WheelBase.Short, description);
+                tempvan = new Van(model, make,VanType.Dropside, price, year, mileage, 0,WheelBase.Short, description,color);
             }
             else if (type == "Bike")
             {
-                tempbike = new Bike(model, make,BikeType.Commuter, price, year, mileage, 0, description);
+                tempbike = new Bike(model, make,BikeType.Commuter, price, year, mileage, 0, description,color);
             }
         }
         private void GetWheelBase()
@@ -233,5 +252,9 @@ namespace Assignment1
             }
         }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

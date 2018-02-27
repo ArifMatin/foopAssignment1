@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +27,8 @@ namespace Assignment1
         public ObservableCollection<Vehicle> vehicleCollection = new ObservableCollection<Vehicle>();
         public ObservableCollection<Vehicle> filteredvehicleCollection;
         public Vehicle[][] filterVehicle = new Vehicle[4][];
+        public Dictionary<string, string> colourList = new Dictionary<string, string>();
+
         public int selectedIndexOfRadio;
 
         public Random random = new Random();
@@ -38,6 +42,7 @@ namespace Assignment1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            GetColourList();
             CreateVanObjects(random, 2);
             CreateBikeObjects(random, 2);
             CreateCaranObjects(random, 2);
@@ -56,7 +61,7 @@ namespace Assignment1
             for (int i = 0; i < numOfObjects; i++)
             {
                 vanArray[i] = new Van(Van.GetVehicleMake(random), Van.GetVehicleModel(random), (VanType)random.Next(6), random.Next(10000,30000),
-                    GetRandomYear(),random.Next(300000), random.Next(10, 30),(WheelBase)random.Next(4),"Nice vehicle");
+                    GetRandomYear(),random.Next(300000), random.Next(10, 30),(WheelBase)random.Next(4),"Nice vehicle",GetRandomColour());
                 vehicleCollection.Add(vanArray[i]);
             }
         }
@@ -66,7 +71,7 @@ namespace Assignment1
             for (int i = 0; i < numOfObjects; i++)
             {
                 CarArray[i] = new Car(Car.GetVehicleMake(random), Car.GetVehicleModel(random), (CarBodyType)random.Next(7), random.Next(10000, 50000),
-                    GetRandomYear(),random.Next(250000), random.Next(10, 40), "Nice vehicle");
+                    GetRandomYear(),random.Next(250000), random.Next(10, 40), "Nice vehicle", GetRandomColour());
                 vehicleCollection.Add(CarArray[i]);
             }
         }
@@ -76,7 +81,7 @@ namespace Assignment1
             for (int i = 0; i < numOfObjects; i++)
             {
                 BikeArray[i] = new Bike(Bike.GetVehicleMake(random), Bike.GetVehicleModel(random), (BikeType)random.Next(6), random.Next(5000, 20000),
-                    GetRandomYear(),random.Next(100000),random.Next(1,12), "Nice vehicle");
+                    GetRandomYear(),random.Next(100000),random.Next(1,12), "Nice vehicle", GetRandomColour());
                 vehicleCollection.Add(BikeArray[i]);
             }
         }
@@ -87,6 +92,27 @@ namespace Assignment1
 
             return random.Next(endYear.Year,presentYear.Year);
 
+        }
+        private void GetColourList()
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
+            using (StreamReader r = new StreamReader("colour.json"))
+            {
+                string json = r.ReadToEnd();
+                colourList =  JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+            }
+        }
+        public string GetRandomColour()
+        {
+            int x = colourList.Count();
+            random.Next(x);
+            string randomKey = colourList.Keys.ToArray()[(int)random.Next(0, x-1)];
+            return randomKey;
         }
 
         private void listBoxVehicle_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -211,6 +237,11 @@ namespace Assignment1
             addVehicloe.ShowDialog();
 
             RadioButton_Checked(sender, e);
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

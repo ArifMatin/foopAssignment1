@@ -14,7 +14,8 @@ namespace Assignment1
 
         public CarBodyType BodyType { get; set; }
 
-        public Car(string model, string make, CarBodyType type, int price,int year,int mile,double size,string des):base(model, make, price,year,mile,size,des)
+        public Car(string model, string make, CarBodyType type, int price,int year,int mile,double size,string des,
+            string color):base(model, make, price,year,mile,size,des,color)
         {
             BodyType = type;
         }
