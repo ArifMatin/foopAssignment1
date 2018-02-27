@@ -24,12 +24,12 @@ namespace Assignment1
         private Bike tempbike;
         private Van tempvan;
 
-        private string make;
-        private string model;
-        private int mileage;
-        private int price;
-        private int year;
-        private string description;
+        private string make = "";
+        private string model = "";
+        private int mileage = 0;
+        private int price = 0;
+        private int year = 0;
+        private string description = "";
 
         public Window2()
         {
@@ -161,6 +161,8 @@ namespace Assignment1
         private void comboAddVehicle_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string type = comboAddVehicle.SelectedItem.ToString();
+            labelWheelbase.Visibility = Visibility.Hidden;
+            comboWheelBse.Visibility = Visibility.Hidden;
 
             if (type == "Car")
             {
@@ -169,6 +171,10 @@ namespace Assignment1
             }
             else if (type == "Van")
             {
+                labelWheelbase.Visibility = Visibility.Visible;
+                comboWheelBse.Visibility = Visibility.Visible;
+                comboWheelBse.ItemsSource = Enum.GetValues(typeof(WheelBase));
+                comboWheelBse.SelectedIndex = 0;
                 comboBoxType.ItemsSource = Enum.GetValues(typeof(VanType));
                 comboBoxType.SelectedIndex = 0;
             }
@@ -203,7 +209,8 @@ namespace Assignment1
         }
         private void GetWheelBase()
         {
-
+            int x = comboWheelBse.SelectedIndex;
+            tempvan.Wheelbase = (WheelBase)x;
         }
         private void CheckNotNull()
         {
