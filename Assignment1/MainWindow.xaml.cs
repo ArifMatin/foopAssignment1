@@ -223,6 +223,10 @@ namespace Assignment1
         private void btnEdit3_Click(object sender, RoutedEventArgs e)
         {
             Vehicle selectedVehicle = listBoxVehicle.SelectedItem as Vehicle;
+            if (selectedVehicle == null)
+            {
+                selectedVehicle = vehicleCollection[0];
+            }
             Window2 edit = new Window2();                                               // create new window and set onwer
             edit.Owner = this;
             edit.vehicle = selectedVehicle;
