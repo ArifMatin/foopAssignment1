@@ -100,7 +100,7 @@ namespace Assignment1
                 TypeNameHandling = TypeNameHandling.All
             };
 
-            using (StreamReader r = new StreamReader("./colour.json"))
+            using (StreamReader r = new StreamReader("../../colour.json"))
             {
                 string json = r.ReadToEnd();
                 colourList =  JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
@@ -241,7 +241,34 @@ namespace Assignment1
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
 
+            //write to file
+            using (StreamWriter sw = new StreamWriter(@"../../vehicleFile.json"))
+            {
+                string json = JsonConvert.SerializeObject(vehicleCollection, settings);
+                sw.Write(json);
+            }
+
+        }
+
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
+            using (StreamReader r = new StreamReader(@"../../vehicleFile.json"))
+            {
+
+                string json = r.ReadToEnd();
+                ObservableCollection<Vehicle> items = JsonConvert.DeserializeObject<ObservableCollection<Vehicle>>(json, settings);
+
+            }
         }
     }
 }
