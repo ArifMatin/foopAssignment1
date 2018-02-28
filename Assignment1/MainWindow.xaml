@@ -7,27 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="601.527" Width="909.733" Loaded="Window_Loaded">
     <DockPanel Margin="0,0,0.2,1">
-        <StackPanel DockPanel.Dock="Top" Height="81" Margin="0,0,0.2,0" Orientation="Horizontal" >
-            <RadioButton x:Name="radioAll" Content="All" Margin="5,20" Padding="5" Checked="RadioButton_Checked" TabIndex="0"/>
-            <RadioButton x:Name="radioCars" Content="Cars" Margin="5,20" Padding="5" Checked="RadioButton_Checked" TabIndex="2"/>
-            <RadioButton x:Name="radioBikes" Content="Bikes" Margin="5,20" Padding="5" Checked="RadioButton_Checked" TabIndex="1"/>
-            <RadioButton x:Name="radioVans" Content="Vans" Margin="5,20" Padding="5" Checked="RadioButton_Checked" TabIndex="3"/>
-            <ComboBox x:Name="comboBoxFilter" Width="120" RenderTransformOrigin="0.996,0.492" SelectionChanged="comboBoxFilter_SelectionChanged"/>
+        <StackPanel DockPanel.Dock="Top" Height="81" Margin="0,0,0.2,0" Orientation="Horizontal"  Background="AliceBlue">
+            <Image Name="imgAll" Width="80" Margin="30,10,0,10"/>
+            <RadioButton x:Name="radioAll" Content="All" Margin="0,20" Padding="5" Checked="RadioButton_Checked" TabIndex="0" Width="40"/>
+            <Image Name="imgCar" Width="80" Margin="25,10,0,10"/>
+            <RadioButton x:Name="radioCars" Content="Cars" Margin="0,20" Padding="5" Checked="RadioButton_Checked" TabIndex="2" Width="50"/>
+            <Image Name="imgBike" Width="80" Margin="25,10,0,10"/>
+            <RadioButton x:Name="radioBikes" Content="Bikes" Margin="0,20" Padding="5" Checked="RadioButton_Checked" TabIndex="1" Width="50"/>
+            <Image Name="imgVan" Width="80" Margin="25,10,0,10"/>
+            <RadioButton x:Name="radioVans" Content="Vans" Margin="0,20,50,20" Padding="5" Checked="RadioButton_Checked" TabIndex="3" Width="50"/>
+            <ComboBox x:Name="comboBoxFilter" Width="180" RenderTransformOrigin="0.996,0.492" SelectionChanged="comboBoxFilter_SelectionChanged"  Margin="5,22"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="76">
-            <Button x:Name="btnAdd" Content="ADD" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnAdd_Click"/>
-            <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnDelete_Click" Style="{StaticResource btnStyle1}"/>
-            <Button x:Name="btnEdit3" Content="Edit" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnEdit3_Click"/>
-            <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnSave_Click"/>
-            <Button x:Name="btnLoad" Content="Load" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnLoad_Click" />
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Height="81"  Background="AliceBlue">
+            <Button x:Name="btnAdd" Content="ADD" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnAdd_Click" Margin="150,20,20,20" Style="{StaticResource btnStyle1}"/>
+            <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnDelete_Click" Style="{StaticResource btnStyle1}" Margin="30,20"/>
+            <Button x:Name="btnEdit3" Content="Edit" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnEdit3_Click" Margin="30,20" Style="{StaticResource btnStyle1}"/>
+            <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnSave_Click" Margin="30,20" Style="{StaticResource btnStyle1}"/>
+            <Button x:Name="btnLoad" Content="Load" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Click="btnLoad_Click" Margin="30,20" Style="{StaticResource btnStyle1}"/>
 
 
         </StackPanel>
         <Grid Margin="0,5.2,0.2,5.2">
             <ListBox x:Name="listBoxVehicle" HorizontalAlignment="Left" Height="314" Margin="41,43,0,0" VerticalAlignment="Top" Width="363" SelectionChanged="listBoxVehicle_SelectionChanged"
                       ItemTemplate="{StaticResource listboxTemplate}"/>
-            <TextBlock x:Name="textBlockInfo" HorizontalAlignment="Left" Margin="464,111,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="201" Width="310"/>
-
+            <TextBlock x:Name="textBlockInfo" HorizontalAlignment="Left" Margin="464,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="201" Width="216"/>
+            <Image x:Name="imageVehicle" HorizontalAlignment="Left" Height="201" Margin="685,111,0,0" VerticalAlignment="Top" Width="200"/>
         </Grid>
 
     </DockPanel>

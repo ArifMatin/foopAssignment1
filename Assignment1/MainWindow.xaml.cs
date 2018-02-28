@@ -38,6 +38,12 @@ namespace Assignment1
             
             InitializeComponent();
 
+            imgCar.Source = new BitmapImage(new Uri("/images/car-xxl.png", UriKind.Relative));
+            imgAll.Source = new BitmapImage(new Uri("/images/all1.png", UriKind.Relative));
+            imgBike .Source = new BitmapImage(new Uri("/images/bike.png", UriKind.Relative));
+            imgVan.Source = new BitmapImage(new Uri("/images/van1.png", UriKind.Relative));
+
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -268,7 +274,14 @@ namespace Assignment1
                 string json = r.ReadToEnd();
                 ObservableCollection<Vehicle> items = JsonConvert.DeserializeObject<ObservableCollection<Vehicle>>(json, settings);
 
+                for (int i = 0; i < items.Count; i++)
+                {
+                    vehicleCollection.Add(items[i]);
+                }
+
             }
+            RadioButton_Checked(sender, e);
+
         }
     }
 }

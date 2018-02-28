@@ -29,8 +29,8 @@
         </DataTemplate>
         
         <Style x:Key="btnStyle1" TargetType="Button">
-            <Setter Property="Background" Value="ForestGreen"/>
-            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="Background" Value="#64e5be"/>
+            <Setter Property="Foreground" Value="#3f8771"/>
         </Style>
     </Application.Resources>
 </Application>
