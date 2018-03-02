@@ -42,7 +42,7 @@ namespace Assignment1
         {
             string[] BikeMakeArray = { "Harley-Davidson", "Honda", "Yamaha" };
             int arrayLength = BikeMakeArray.Length;
-            bikeMakeIndex = random.Next(0, arrayLength - 1);
+            bikeMakeIndex = random.Next(0, arrayLength);
 
             return BikeMakeArray[bikeMakeIndex];
         }

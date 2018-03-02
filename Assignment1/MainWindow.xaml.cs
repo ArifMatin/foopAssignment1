@@ -49,9 +49,9 @@ namespace Assignment1
         {
             GetColourList();
             //vehicles created
-            CreateVanObjects(random, 2);
-            CreateBikeObjects(random, 20);
-            CreateCaranObjects(random, 2);
+            CreateVanObjects(random, 10);
+            CreateBikeObjects(random, 10);
+            CreateCaranObjects(random, 10);
             string[] sortBy = { "All", "Price", "Mileage", "Make" };
 
             listBoxVehicle.ItemsSource = vehicleCollection;
@@ -218,6 +218,7 @@ namespace Assignment1
                 int x = vehicleCollection.IndexOf(selectedVehicle); // this removes from collection of vehicles
                 vehicleCollection.RemoveAt(x);
                 textBlockInfo.Text = String.Empty;
+                imageVehicle.Source = null;
                 RadioButton_Checked(sender, e);  //this call the radio changed method which updates the ObservableCollection and the view.
             }
         }
@@ -236,6 +237,7 @@ namespace Assignment1
 
             edit.ShowDialog();
 
+            DisplayImage(selectedVehicle);
             RadioButton_Checked(sender, e); // call this method again to sort the list of vehicles
             textBlockInfo.Text = selectedVehicle.GetDetails();
 

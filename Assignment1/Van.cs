@@ -46,7 +46,7 @@ namespace Assignment1
         {
             string[] vanMakeArray = { "Mercedes", "Ford", "Volkswagen" };
             int arrayLength = vanMakeArray.Length;
-            vanMakeIndex = random.Next(0, arrayLength - 1);
+            vanMakeIndex = random.Next(0, arrayLength);
 
             return vanMakeArray[vanMakeIndex];
         }

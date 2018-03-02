@@ -25,6 +25,9 @@ namespace Assignment1
         private Bike tempbike;
         private Van tempvan;
 
+        private List<string> imageList = new List<string>();
+        private int imageListIndex = 0;
+
         private string make = "";
         private string model = "";
         private int mileage = 0;
@@ -276,9 +279,12 @@ namespace Assignment1
 
                 string shortFileName = filename.Substring(filename.LastIndexOf('\\') + 1);
 
-                string newFile = imageDirectory + shortFileName;
+                if (CheckImageName(shortFileName))
+                {
+                    string newFile = imageDirectory + shortFileName;
 
-                File.Copy(filename, newFile);
+                    File.Copy(filename, newFile);
+                }
 
                 textImage.Text = shortFileName;
 
@@ -292,6 +298,26 @@ namespace Assignment1
             string imageDirectory = grandParent + "\\images\\";
 
             return imageDirectory;
+        }
+        private bool CheckImageName(string newImage)
+        {
+            bool ans = true;
+            string[] files = Directory.GetFiles(GetImageDirectory());
+
+            foreach (string s in files)
+            {
+                imageList.Add(s.Substring(s.LastIndexOf('\\') + 1));
+            }
+
+            for(int i = 0; i < imageList.Count; i++) // checks if newimage is in images folder.
+            {
+                if (imageList[i] == newImage)
+                {
+                    ans = false;
+                    imageListIndex = i;
+                }
+            }
+            return ans;
         }
     }
 }
