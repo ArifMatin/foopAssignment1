@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,7 @@ namespace Assignment1
         private string description = "";
         private string[] colors;
         private string color = ""; // read in the colors and show in combox
+        private string imageName = "";
 
         public Window2()
         {
@@ -40,7 +42,7 @@ namespace Assignment1
         }
         public void ShowDetails()
         {
-            labelAddVehicle.Visibility = Visibility.Hidden;
+            labelAddVehicle.Visibility = Visibility.Hidden;  //changes the visibility for edit
             labelEdit.Visibility = Visibility.Visible;
             comboAddVehicle.Visibility = Visibility.Hidden;
 
@@ -53,6 +55,7 @@ namespace Assignment1
             txtYear.Text = vehicle.Year.ToString();
             txtMileage.Text = vehicle.Mileage.ToString();
             txtDescription.Text = vehicle.Description;
+            textImage.Text = vehicle.ImageName;
 
 
             int x = Array.IndexOf(colors, vehicle.Colour.ToString());
@@ -114,6 +117,7 @@ namespace Assignment1
             year = Convert.ToInt32(txtYear.Text);
             description = txtDescription.Text;
             color = comboColor.SelectedItem.ToString();
+            imageName = textImage.Text;
         }
         private void AssignVales()
         {
@@ -124,6 +128,7 @@ namespace Assignment1
             vehicle.Year = year;
             vehicle.Description = description;
             vehicle.Colour = color;
+            vehicle.ImageName = imageName;
         }
         private void AssignComboSelection()
         {
@@ -145,13 +150,13 @@ namespace Assignment1
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (labelEdit.Visibility == Visibility.Visible)
+            if (labelEdit.Visibility == Visibility.Visible) // for when its edit
             {
                 ReadInDeatils();
                 AssignVales();
                 AssignComboSelection();
             }
-            else if (labelAddVehicle.Visibility == Visibility.Visible)
+            else if (labelAddVehicle.Visibility == Visibility.Visible) // for when its add new vehicle
             {
                 ReadInDeatils();
                 CreateNewVehicle();
@@ -215,15 +220,15 @@ namespace Assignment1
 
             if (type == "Car")
             {
-                tempcar = new Car(model,make,CarBodyType.Convertible,price,year,mileage,0,description,color);
+                tempcar = new Car(model,make,CarBodyType.Convertible,price,year,mileage,0,description,color, "/images/all1.png",imageName);
             }
             else if (type == "Van")
             {
-                tempvan = new Van(model, make,VanType.Dropside, price, year, mileage, 0,WheelBase.Short, description,color);
+                tempvan = new Van(model, make,VanType.Dropside, price, year, mileage, 0,WheelBase.Short, description,color, "/images/all1.png",imageName);
             }
             else if (type == "Bike")
             {
-                tempbike = new Bike(model, make,BikeType.Commuter, price, year, mileage, 0, description,color);
+                tempbike = new Bike(model, make,BikeType.Commuter, price, year, mileage, 0, description,color, "/images/all1.png",imageName);
             }
         }
         private void GetWheelBase()
@@ -255,6 +260,38 @@ namespace Assignment1
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSelectImage_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Filter = "Images (*.JPG;*.JPEG;*.PNG) | *.JPG;*.JPEG;*.PNG";
+            Nullable<bool> result = dlg.ShowDialog();
+            string filename = "";
+            if (result == true)
+            {
+                filename = dlg.FileName;
+
+                string imageDirectory = GetImageDirectory();
+
+                string shortFileName = filename.Substring(filename.LastIndexOf('\\') + 1);
+
+                string newFile = imageDirectory + shortFileName;
+
+                File.Copy(filename, newFile);
+
+                textImage.Text = shortFileName;
+
+            }
+        }
+        private string GetImageDirectory()
+        {
+            string currentDir = Directory.GetCurrentDirectory();
+            DirectoryInfo parent = Directory.GetParent(currentDir);
+            DirectoryInfo grandParent = Directory.GetParent(parent.FullName);
+            string imageDirectory = grandParent + "\\images\\";
+
+            return imageDirectory;
         }
     }
 }

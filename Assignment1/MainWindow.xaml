@@ -27,11 +27,11 @@
 
 
         </StackPanel>
-        <Grid Margin="0,5.2,0.2,5.2">
-            <ListBox x:Name="listBoxVehicle" HorizontalAlignment="Left" Height="314" Margin="41,43,0,0" VerticalAlignment="Top" Width="363" SelectionChanged="listBoxVehicle_SelectionChanged"
+        <Grid Margin="0,5.2,0.2,5.2" Background="#bdebfc">
+            <ListBox x:Name="listBoxVehicle" HorizontalAlignment="Left" Height="314" Margin="41,43,0,0" VerticalAlignment="Top" Width="405" SelectionChanged="listBoxVehicle_SelectionChanged"
                       ItemTemplate="{StaticResource listboxTemplate}"/>
-            <TextBlock x:Name="textBlockInfo" HorizontalAlignment="Left" Margin="464,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="201" Width="216"/>
-            <Image x:Name="imageVehicle" HorizontalAlignment="Left" Height="201" Margin="685,111,0,0" VerticalAlignment="Top" Width="200"/>
+            <TextBlock x:Name="textBlockInfo" HorizontalAlignment="Left" Margin="464,129,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="183" Width="216"/>
+            <Image x:Name="imageVehicle" HorizontalAlignment="Left" Height="195" Margin="685,102,0,0" VerticalAlignment="Top" Width="200"/>
         </Grid>
 
     </DockPanel>

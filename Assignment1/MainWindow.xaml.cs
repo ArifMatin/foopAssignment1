@@ -35,26 +35,27 @@ namespace Assignment1
 
         public MainWindow()
         {
-            
-            InitializeComponent();
 
+            InitializeComponent();
+            //image icons displayed
             imgCar.Source = new BitmapImage(new Uri("/images/car-xxl.png", UriKind.Relative));
             imgAll.Source = new BitmapImage(new Uri("/images/all1.png", UriKind.Relative));
-            imgBike .Source = new BitmapImage(new Uri("/images/bike.png", UriKind.Relative));
+            imgBike.Source = new BitmapImage(new Uri("/images/bike.png", UriKind.Relative));
             imgVan.Source = new BitmapImage(new Uri("/images/van1.png", UriKind.Relative));
-
 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             GetColourList();
+            //vehicles created
             CreateVanObjects(random, 2);
-            CreateBikeObjects(random, 2);
+            CreateBikeObjects(random, 20);
             CreateCaranObjects(random, 2);
-            string[] sortBy = {"All","Price", "Mileage", "Make" };
-            
+            string[] sortBy = { "All", "Price", "Mileage", "Make" };
+
             listBoxVehicle.ItemsSource = vehicleCollection;
+            //combo and radio checked and set to 0
             radioAll.IsChecked = true;
             selectedIndexOfRadio = 0;
             comboBoxFilter.ItemsSource = sortBy;
@@ -66,8 +67,8 @@ namespace Assignment1
             Van[] vanArray = new Van[numOfObjects];
             for (int i = 0; i < numOfObjects; i++)
             {
-                vanArray[i] = new Van(Van.GetVehicleMake(random), Van.GetVehicleModel(random), (VanType)random.Next(6), random.Next(10000,30000),
-                    GetRandomYear(),random.Next(300000), random.Next(10, 30),(WheelBase)random.Next(4),"Nice vehicle",GetRandomColour());
+                vanArray[i] = new Van(Van.GetVehicleMake(random), Van.GetVehicleModel(random), (VanType)random.Next(6), random.Next(10000, 30000),
+                    GetRandomYear(), random.Next(300000), random.Next(10, 30), (WheelBase)random.Next(4), "Nice vehicle", GetRandomColour(), "/images/all1.png", "vanV.jpg");
                 vehicleCollection.Add(vanArray[i]);
             }
         }
@@ -77,7 +78,7 @@ namespace Assignment1
             for (int i = 0; i < numOfObjects; i++)
             {
                 CarArray[i] = new Car(Car.GetVehicleMake(random), Car.GetVehicleModel(random), (CarBodyType)random.Next(7), random.Next(10000, 50000),
-                    GetRandomYear(),random.Next(250000), random.Next(10, 40), "Nice vehicle", GetRandomColour());
+                    GetRandomYear(), random.Next(250000), random.Next(10, 40), "Nice vehicle", GetRandomColour(), "/images/all1.png", "carV.png");
                 vehicleCollection.Add(CarArray[i]);
             }
         }
@@ -87,16 +88,16 @@ namespace Assignment1
             for (int i = 0; i < numOfObjects; i++)
             {
                 BikeArray[i] = new Bike(Bike.GetVehicleMake(random), Bike.GetVehicleModel(random), (BikeType)random.Next(6), random.Next(5000, 20000),
-                    GetRandomYear(),random.Next(100000),random.Next(1,12), "Nice vehicle", GetRandomColour());
+                    GetRandomYear(), random.Next(100000), random.Next(1, 12), "Nice vehicle", GetRandomColour(), "/images/all1.png", "bikeV.jpeg");
                 vehicleCollection.Add(BikeArray[i]);
             }
         }
         private int GetRandomYear()
         {
             DateTime presentYear = DateTime.Now;
-            DateTime endYear = new DateTime(presentYear.Year - 10,01,01);
+            DateTime endYear = new DateTime(presentYear.Year - 10, 01, 01);
 
-            return random.Next(endYear.Year,presentYear.Year);
+            return random.Next(endYear.Year, presentYear.Year);
 
         }
         private void GetColourList()
@@ -109,7 +110,7 @@ namespace Assignment1
             using (StreamReader r = new StreamReader("../../colour.json"))
             {
                 string json = r.ReadToEnd();
-                colourList =  JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                colourList = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 
             }
         }
@@ -117,7 +118,7 @@ namespace Assignment1
         {
             int x = colourList.Count();
             random.Next(x);
-            string randomKey = colourList.Keys.ToArray()[(int)random.Next(0, x-1)];
+            string randomKey = colourList.Keys.ToArray()[(int)random.Next(0, x - 1)];
             return randomKey;
         }
 
@@ -127,6 +128,7 @@ namespace Assignment1
             if (selectedVehicle != null)
             {
                 textBlockInfo.Text = selectedVehicle.GetDetails();
+                DisplayImage(selectedVehicle);
             }
         }
 
@@ -141,21 +143,21 @@ namespace Assignment1
             }
             else if (radioBikes.IsChecked == true)
             {
-                filterVehicle[1] =  filterRadioButton("Bike");                          //bike is 1
+                filterVehicle[1] = filterRadioButton("Bike");                          //bike is 1
                 filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[1]);
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;
                 selectedIndexOfRadio = 1;                                                   //this is used for comboxselection
             }
             else if (radioCars.IsChecked == true)
             {
-                filterVehicle[2] =  filterRadioButton("Car");                           //car is 2
+                filterVehicle[2] = filterRadioButton("Car");                           //car is 2
                 filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[2]);
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;
                 selectedIndexOfRadio = 2;
             }
             else if (radioVans.IsChecked == true)
             {
-                filterVehicle[3] =  filterRadioButton("Van");                           //van is 3
+                filterVehicle[3] = filterRadioButton("Van");                           //van is 3
                 filteredvehicleCollection = new ObservableCollection<Vehicle>(filterVehicle[3]);
                 listBoxVehicle.ItemsSource = filteredvehicleCollection;
                 selectedIndexOfRadio = 3;
@@ -216,7 +218,7 @@ namespace Assignment1
                 int x = vehicleCollection.IndexOf(selectedVehicle); // this removes from collection of vehicles
                 vehicleCollection.RemoveAt(x);
                 textBlockInfo.Text = String.Empty;
-                RadioButton_Checked(sender,e);  //this call the radio changed method which updates the ObservableCollection and the view.
+                RadioButton_Checked(sender, e);  //this call the radio changed method which updates the ObservableCollection and the view.
             }
         }
 
@@ -230,11 +232,11 @@ namespace Assignment1
             Window2 edit = new Window2();                                               // create new window and set onwer
             edit.Owner = this;
             edit.vehicle = selectedVehicle;
-            edit.ShowDetails();
+            edit.ShowDetails(); //enter class from here
 
             edit.ShowDialog();
 
-            RadioButton_Checked(sender, e);
+            RadioButton_Checked(sender, e); // call this method again to sort the list of vehicles
             textBlockInfo.Text = selectedVehicle.GetDetails();
 
         }
@@ -243,7 +245,7 @@ namespace Assignment1
             Window2 addVehicloe = new Window2();
             addVehicloe.Owner = this;
 
-            addVehicloe.NewVehicle();
+            addVehicloe.NewVehicle();  //enters class from here
             addVehicloe.ShowDialog();
 
             RadioButton_Checked(sender, e);
@@ -286,6 +288,25 @@ namespace Assignment1
             }
             RadioButton_Checked(sender, e);
 
+        }
+
+        private void DisplayImage(Vehicle v)
+        {
+            string filename = v.ImageName;
+
+            if (filename != null)
+            {
+               imageVehicle.Source = new BitmapImage(new Uri(GetImageDirectory() + filename, UriKind.Absolute));
+            }
+        }
+        private string GetImageDirectory()
+        {
+            string currentDir = Directory.GetCurrentDirectory();
+            DirectoryInfo parent = Directory.GetParent(currentDir);
+            DirectoryInfo grandParent = Directory.GetParent(parent.FullName);
+            string imageDirectory = grandParent + "\\images\\";
+
+            return imageDirectory;
         }
     }
 }

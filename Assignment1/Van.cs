@@ -19,7 +19,7 @@ namespace Assignment1
         public WheelBase Wheelbase { get; set; }
 
         public Van(string model, string make, VanType type,int price,int year,int mile,double size, WheelBase wheel,string des,
-            string color):base(model, make, price,year,mile,size,des,color)
+            string color,string socure,string img):base(model, make, price,year,mile,size,des,color,socure,img)
         {
             BodyType = type;
             Wheelbase = wheel;
