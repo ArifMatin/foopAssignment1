@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Assignment1"
         mc:Ignorable="d"
         Title="Window2" Height="550" Width="380" Loaded="Window_Loaded">
-    <Grid>
+    <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
