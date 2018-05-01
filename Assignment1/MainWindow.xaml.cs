@@ -42,7 +42,7 @@ namespace Assignment1
             imgAll.Source = new BitmapImage(new Uri("/images/all1.png", UriKind.Relative));
             imgBike.Source = new BitmapImage(new Uri("/images/bike.png", UriKind.Relative));
             imgVan.Source = new BitmapImage(new Uri("/images/van1.png", UriKind.Relative));
-
+            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -309,6 +309,10 @@ namespace Assignment1
             string imageDirectory = grandParent + "\\images\\";
 
             return imageDirectory;
+        }
+        public string DisplayedImagePath
+        {
+            get { return @"/images/all1.png"; }
         }
     }
 }
