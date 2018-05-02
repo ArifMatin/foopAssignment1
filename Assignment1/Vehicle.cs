@@ -22,6 +22,14 @@ namespace Assignment1
         public string ImageName { get; set; }
         public double EngineSize { get; set; }
 
+        public string DisplayImage
+        {
+            get
+            {
+                return string.Format(@"\images\{0}", ImageName);
+            }
+        }
+
         public Vehicle(string make, string model, int price, int year, int mile, double size,string des,string color,string socure,string img)
         {
             Make = make;

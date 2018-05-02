@@ -115,9 +115,9 @@ namespace Assignment1
         {
             make = txtMake.Text;
             model = txtModel.Text;
-            mileage = Convert.ToInt32(txtMileage.Text);
-            price = Convert.ToInt32(txtPrice.Text);
-            year = Convert.ToInt32(txtYear.Text);
+            mileage = CheckNumber(txtMileage.Text); //Convert.ToInt32(txtMileage.Text);
+            price = CheckNumber(txtPrice.Text);
+            year = CheckNumber(txtYear.Text);
             description = txtDescription.Text;
             color = comboColor.SelectedItem.ToString();
             imageName = textImage.Text;
@@ -318,6 +318,21 @@ namespace Assignment1
                 }
             }
             return ans;
+        }
+        private int CheckNumber(string x) // try catch
+        {
+            int num = 0;
+            try
+            {
+                num = Convert.ToInt32(x);
+           
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(String.Format("Message : {0}\n Source : {1}\n StackTrace : {2}", e.Message, e.Source, e.StackTrace));
+            }
+            return num;
         }
     }
 }

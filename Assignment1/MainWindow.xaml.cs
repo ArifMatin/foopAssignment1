@@ -314,5 +314,16 @@ namespace Assignment1
         {
             get { return @"/images/all1.png"; }
         }
+
+        private void btnOwners_Click(object sender, RoutedEventArgs e)
+        {
+            OwnerWindow owner = new OwnerWindow
+            {
+                Owner = this
+            };
+
+            owner.ShowOwners();
+            owner.ShowDialog();
+        }
     }
 }
